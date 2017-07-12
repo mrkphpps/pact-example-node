@@ -1,0 +1,53 @@
+I, [2017-07-12T11:02:18.290062 #89244]  INFO -- : Registered expected interaction GET /name/Estonia
+D, [2017-07-12T11:02:18.290283 #89244] DEBUG -- : {
+  "description": "a request for Estonia info",
+  "providerState": "Has Estonia information",
+  "request": {
+    "method": "GET",
+    "path": "/name/Estonia",
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "country": {
+        "name": "Estonia",
+        "capital": "Tallinn",
+        "population": 1315944
+      }
+    }
+  }
+}
+I, [2017-07-12T11:02:18.300201 #89244]  INFO -- : Received request GET /name/Estonia
+D, [2017-07-12T11:02:18.300289 #89244] DEBUG -- : {
+  "path": "/name/Estonia",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Accept": "application/json",
+    "Host": "localhost:1234",
+    "Connection": "close",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2017-07-12T11:02:18.300468 #89244]  INFO -- : Found matching response for GET /name/Estonia
+D, [2017-07-12T11:02:18.300536 #89244] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "country": {
+      "name": "Estonia",
+      "capital": "Tallinn",
+      "population": 1315944
+    }
+  }
+}
+I, [2017-07-12T11:02:18.309096 #89244]  INFO -- : Writing pact with details {:consumer=>{:name=>"My Consumer"}, :provider=>{:name=>"Country Provider"}}
+I, [2017-07-12T11:02:18.309267 #89244]  INFO -- : Writing pact for Country Provider to /Volumes/HDD2/Users/markphipps/Code/pact-node-example/pacts/my_consumer-country_provider.json

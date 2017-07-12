@@ -1,0 +1,39 @@
+{
+  "consumer": {
+    "name": "My Consumer"
+  },
+  "provider": {
+    "name": "Country Provider"
+  },
+  "interactions": [
+    {
+      "description": "a request for Estonia info",
+      "providerState": "Has Estonia information",
+      "request": {
+        "method": "GET",
+        "path": "/name/Estonia",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "country": {
+            "name": "Estonia",
+            "capital": "Tallinn",
+            "population": 1315944
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
