@@ -5,6 +5,30 @@ const chaiAsPromised = require('chai-as-promised');
 const pactWrapper = require('@pact-foundation/pact-node');
 const CountryServiceConsumer = require('../CountryServiceConsumer');
 const Country = require('../Country');
+const fs = require('fs');
+const request = require('request');
+
+// TODO this needs to be run only after a success...
+// alternative pact publisher...
+// NB: where we publish an unchanged pact we get successful publish response but the pact is NOT updated in the broker
+var PactPublisher = require('node-pact-publisher');
+
+var config = {
+    // Version of your application to be published
+    appVersion: '1.1.0',
+    // Url of the remote pact broker
+    brokerBaseUrl: 'http://ec2-54-89-227-183.compute-1.amazonaws.com',
+    // Path containing JSON pact contracts (optional)
+    pacts: [path.resolve(process.cwd(), 'pacts') + '/countryconsumer-countriesprovider.json'],
+    tag: 'prod'
+};
+var myPublisher = new PactPublisher(config);
+myPublisher.publish().then(function (numberOfPactsPublished) {
+    console.info('Congrats! ' + numberOfPactsPublished + ' pacts were published!');
+}, function (numberOfPactsPublished) {
+    console.error('Not all pacts were published, but ' + numberOfPactsPublished + ' were');
+});
+// eof pact publisher
 
 const expect = chai.expect;
 
@@ -33,7 +57,7 @@ describe('Pact', () => {
     before((done) => {
         // Start the mock server
         mockServer.start().then(() => {
-            provider = Pact({consumer: 'My Consumer', provider: 'Country Provider', port: 1234});
+            provider = Pact({consumer: 'CountryConsumer', provider: 'CountriesProvider', port: 1234});
 
             // add an interaction
             provider.addInteraction({
@@ -61,7 +85,8 @@ describe('Pact', () => {
     });
 
     after(() => {
-        // Write pact file
+
+    // Write pact file
         provider.finalize().then(() => {
             pactWrapper.removeAllServers()
         })

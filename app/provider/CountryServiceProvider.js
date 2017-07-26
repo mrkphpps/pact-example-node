@@ -7,14 +7,6 @@ const bodyParser = require('body-parser');
 const countryRepo = new CountryRepo();
 
 app.use(bodyParser.json());
-// app.get('/post/list', function (req, res) {
-//     const response = {
-//         posts: countryRepo.fetchAll()
-//     };
-//
-//     res.writeHead(200, {'Content-Type': 'application/json'});
-//     res.end(JSON.stringify(response));
-// });
 
 app.get('/name/:name', function (req, res) {
     const response = {
@@ -39,14 +31,13 @@ app.post('/setup', function (req, res) {
     countryRepo.clear();
     switch (state) {
         case 'Has Estonia information': {
-            countryRepo.insert(new Country('Estonia', 'Tallinn', 1315944));
+            countryRepo.insert(new Country('Estonia', 'Tallin', 1315944));
             break;
         }
     }
 
     res.end();
 });
-
 
 var server = app.listen(8081, function () {
     var host = server.address().address;
